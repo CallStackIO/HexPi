@@ -33,7 +33,7 @@ Now that I have a usable formula, It was time for me to begin programming. Of th
 
 ### $B_N(a)=\displaystyle\sum_{k=N}^{N+P+10} \frac{16^{N-k}}{8k+a}$
 
-Now as we can see, sum B is quite fast as it only needs to calculate a small number of terms. What makes this function a bit interesting is the upper bound of the sum. At worst, that sum may have many 0's (eg. 0.00000...) before a term may appear. For this, we will give P; the amount of precision needed to sum to. I have found that 10 is a much sufficient amount of precision + 10 to mitigate an carryover problems.
+Now as we can see, sum B is quite fast as it only needs to calculate a small number of terms. What makes this function a bit interesting is the upper bound of the sum. At worst, that sum may have many 0's (eg. 0.00000...) before a non-zero number may appear. For this, we will give P; the amount of precision needed to sum to. I have found that 10 is a much sufficient amount of precision + 10 to mitigate an carryover problems.
 
 ### $A_N(a)=\displaystyle\sum_{k=0}^{N-1} \frac{16^{N-k}\bmod 8k+a}{8k+a}$
 
