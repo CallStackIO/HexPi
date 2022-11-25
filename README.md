@@ -19,11 +19,9 @@ If we hop into desmos and take a look at this function, we can see that it is in
 
 ![Screenshot_20221119_094706](https://user-images.githubusercontent.com/108390075/202864406-b13d7a96-c4be-46b2-a977-b767427fab3c.png)
 
-As you can see, this formula is able to produce the digits of pi. However, there are 2 immidiate problems.
+As you can see, this formula is able to produce the digits of pi. 
 
-First of all, the sum is infinite. This is the lesser problem, as the solution is quite simple. After enough iterations of the sum, the formula will create smaller and smaller values, meaning we only have to sum up to a certian precision.
-
-Second of all, $\frac{1}{16^k}$ gets very small very quickly. In fact, by the time k is 100, it is smaller than my chance at getting a girlfriend. That is to say, $3.8725919148*10^{-121}$. Using math at this infinitesimally small of a scale is not fun, and it gets far worse if we want to for example calculate the millionth digit. The solution to this problem? Implementing a spigot algorithm for this formula. I would have *liked* to do it myself, however I do not have even a remote idea how to do so. Luckily there is a [Wikipedia article](https://en.wikipedia.org/wiki/Bailey%E2%80%93Borwein%E2%80%93Plouffe_formula) on this formula which details and breaks down a much more computable version of the formula.
+Through some manipulation, the formula is turned into something computable. All the math can be found on the [wikipedia article](https://en.wikipedia.org/wiki/Bailey%E2%80%93Borwein%E2%80%93Plouffe_formula) for the formula.
 
 ![Screenshot_20221119_102919](https://user-images.githubusercontent.com/108390075/202866088-a4c5dd43-bce4-4c39-8876-e64bb4164b3f.png)
 
@@ -37,6 +35,12 @@ Now as we can see, sum B is quite fast as it only needs to calculate a small num
 
 ### $A_N(a)=\displaystyle\sum_{k=0}^{N-1} \frac{16^{N-k}\bmod 8k+a}{8k+a}$
 
-Sum A is more tricky, as it requires using fast exponentiation.
+Sum A is more tricky, as it requires using fast exponentiation. However, by using fast exponentiation, we are able to utilize a trick that allows us to calculate only the fractional part of this sum, which is what we're interested in anyways.
+
+We can calculate the fractional part of $\frac{16^{N-k}\bmod 8k+a}{8k+a}$ by re-writing it as $\frac{(16\cdot 16 \bmod 8k+a)(16\cdot 16 \bmod 8k+a)(...)}{8k+a}$. And boom, we no longer have to deal with $16^{N-k}$ becoming too big to store in an int.
+
+And with this, we can begin the coding.
 
 ### Step 2 | Coding (In C!)
+
+I chose C because realistically, we need to preform these calculations as fast as possible. Using an interpreted language like java or python would be abomidably slow for large values of N.
