@@ -1,9 +1,8 @@
 # HexPi
 ## Brief
 HexPi is a project of mine that has no definitive purpose or function yet. It will act as a way for me to explore mathematics and more specifically, mathematics surrounding pi.
-I will document all my research about the various algorithms used and my progress and goals.
 
-Hopefully by the end of it, I will have created something unique.
+
 
 ## Part 1
 
@@ -14,12 +13,10 @@ Upon discovering this, it reignited my interest in mathematics, and I got the su
 
 ![Screenshot_20221119_092551](https://user-images.githubusercontent.com/108390075/202863626-2d4c7709-943e-4fb3-9da0-587255ff947c.png)
 
-### Step 1 | Math
+### An Explanation of the Math
 If we hop into desmos and take a look at this function, we can see that it is in fact able to calctulate the digits of pi.
 
 ![Screenshot_20221119_094706](https://user-images.githubusercontent.com/108390075/202864406-b13d7a96-c4be-46b2-a977-b767427fab3c.png)
-
-As you can see, this formula is able to produce the digits of pi. 
 
 Through some manipulation, the formula is turned into something computable. All the math can be found on the [wikipedia article](https://en.wikipedia.org/wiki/Bailey%E2%80%93Borwein%E2%80%93Plouffe_formula) for the formula.
 
@@ -38,9 +35,3 @@ Now as we can see, sum B is quite fast as it only needs to calculate a small num
 Sum A is more tricky, as it requires using fast exponentiation. However, by using fast exponentiation, we are able to utilize a trick that allows us to calculate only the fractional part of this sum, which is what we're interested in anyways.
 
 We can calculate the fractional part of $\frac{16^{N-k}\bmod 8k+a}{8k+a}$ by re-writing it as $\frac{(16\cdot 16 \bmod 8k+a)(16\cdot 16 \bmod 8k+a)(...)}{8k+a}$. And boom, we no longer have to deal with $16^{N-k}$ becoming too big to store in an int.
-
-And with this, we can begin the coding.
-
-### Step 2 | Coding (In C!)
-
-I chose C because realistically, we need to preform these calculations as fast as possible. Using an interpreted language like java or python would be abomidably slow for large values of N.
