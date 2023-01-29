@@ -35,3 +35,11 @@ Now as we can see, sum B is quite fast as it only needs to calculate a small num
 Sum A is more tricky, as it requires using fast exponentiation. However, by using fast exponentiation, we are able to utilize a trick that allows us to calculate only the fractional part of this sum, which is what we're interested in anyways.
 
 We can calculate the fractional part of $\frac{16^{N-k}\bmod 8k+a}{8k+a}$ by re-writing it as $\frac{(16\cdot 16 \bmod 8k+a)(16\cdot 16 \bmod 8k+a)(...)}{8k+a}$. And boom, we no longer have to deal with $16^{N-k}$ becoming too big to store in an int.
+
+And with that, we can feasibly compute the nth digit of pi. The code includes 2 functions: Calculatng pi from the beginning and calculating the nth digit.
+
+## How to Build
+Simply clone the repo or download pi.c and:
+```C
+# gcc -lm -o pi pi.c
+```
